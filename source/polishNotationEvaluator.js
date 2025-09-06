@@ -6,7 +6,7 @@ const wrong_arg_error = new Error("Неверный аргумент функц�
  * @param {string} polishExpression - представление выражения в польской нотации в виде строки
  * 
  * @example
- * // returns 9
+ * // returns 3
  * polishNotation("+ 1 2");
  * 
  * @returns {Number}
