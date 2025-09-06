@@ -1,7 +1,16 @@
 'use strict'
 const wrong_arg_error = new Error("Неверный аргумент функции - необходимо передать строку (не пустую)")
 
-
+/**
+ * Функция вычисляющая выражение в польской нотации
+ * @param {string} polishExpression - представление выражения в польской нотации в виде строки
+ * 
+ * @example
+ * // returns 9
+ * polishNotation("+ 1 2");
+ * 
+ * @returns {Number}
+ */
 function polishNotationEvaluator(polishExpression) {
     if (!polishExpression) {
         throw wrong_arg_error
