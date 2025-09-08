@@ -63,4 +63,34 @@ QUnit.module("Тестируем функцию polishNotationEvaluator", functi
         const input = "+ /";
         assert.throws(() => polishNotationEvaluator(input), Error);
     });
+
+    QUnit.test("Правильно вычисляет сложное выражение", function(assert) {
+        const input = "* / - 10 5 + 2 3 5"; 
+        const result = polishNotationEvaluator(input);
+
+        assert.equal(result, 5);
+    });
+
+    QUnit.test("Правильно вычисляет большое количество одинаковых операций", function(assert) {
+        const input = "- - - - 10 1 1 1 1"; 
+        const result = polishNotationEvaluator(input);
+
+        assert.equal(result, 6);
+    });
+
+    QUnit.test("Возвращение ошибки при некорректном числе операндов", function(assert) {
+        const input = "+ 2 3 4";
+        assert.throws(() => polishNotationEvaluator(input), Error);
+    });
+
+    QUnit.test("Возвращение ошибки при некорректное числе операторов", function(assert) {
+        const input = "+ + 2 3";
+        assert.throws(() => polishNotationEvaluator(input), Error);
+    });
+
+    QUnit.test("Правильно вычисляет с пробелами в неожиданных местах", function(assert) {
+        const input1 = "  + 2 3  ";
+        const result1 = polishNotationEvaluator(input1);
+        assert.equal(result1, 5);
+    });
 });
