@@ -1,5 +1,4 @@
 'use strict'
-const wrong_arg_error = new Error("Неверный аргумент функции - необходимо передать строку")
 
 /**
  * Функция вычисляющая выражение в польской нотации
@@ -13,36 +12,25 @@ const wrong_arg_error = new Error("Неверный аргумент функц�
  */
 function polishNotationEvaluator(polishExpression) {
     if (polishExpression == ''){
+        console.warn("На вход пришла пустая строка!");
         return NaN
     }
-    if (!polishExpression) {
-        throw wrong_arg_error
-    }
-    if (typeof(polishExpression) != 'string'){
-        throw wrong_arg_error
+
+    if ((typeof(polishExpression) != 'string') || !polishExpression){
+        throw new Error("Неверный аргумент функции - необходимо передать строку")
     }
     
-    let elements = polishExpression.trim().split(' ');
-    let symbols = [];
     let stack = [];
 
-    for (let el of elements) {
-        if (el !== '') {
-            symbols.push(el);
-        }
-    }
-    symbols = symbols.reverse();
-
-
-        for (let elem of symbols) {
+    polishExpression.trim().split(' ').filter(el => el !== '').reverse().forEach(elem => {               
             let number = Number(elem);
             let result;
-            
+
             if (isNaN(number)) {
                 let a = stack.pop();
                 let b = stack.pop();
 
-                if (a == null || b == null) {
+                if (a === undefined || b === undefined) {
                     throw new Error("Недостаточное количество операндов (аргументов операции)");
                 }
                 
@@ -64,12 +52,10 @@ function polishNotationEvaluator(polishExpression) {
             }
             else {
                 stack.push(number);
-
             }
+        });
+    if (stack.length > 1) {
+        throw new Error('Ошибка итогового значения')
     }
-
     return stack[0]
-
-
-
 }
