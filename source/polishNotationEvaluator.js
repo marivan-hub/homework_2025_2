@@ -11,12 +11,12 @@
  * @returns {Number}
  */
 function polishNotationEvaluator(polishExpression) {
-    if (polishExpression == ''){
+    if (polishExpression == '') {
         console.warn("На вход пришла пустая строка!");
         return NaN;
     }
 
-    if ((typeof(polishExpression) != 'string') || !polishExpression){
+    if ((typeof(polishExpression) != 'string') || !polishExpression) {
         throw new Error("Неверный аргумент функции - необходимо передать строку");
     }
     
