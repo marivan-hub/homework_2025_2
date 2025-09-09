@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * Функция вычисляющая выражение в польской нотации
@@ -10,8 +10,8 @@
  * 
  * @returns {Number}
  */
-function polishNotationEvaluator(polishExpression) {
-    if (polishExpression == '') {
+const polishNotationEvaluator = (polishExpression) => {
+    if (polishExpression === '') {
         console.warn("На вход пришла пустая строка!");
         return NaN;
     }
@@ -20,15 +20,15 @@ function polishNotationEvaluator(polishExpression) {
         throw new Error("Неверный аргумент функции - необходимо передать строку");
     }
     
-    let stack = [];
+    const stack = [];
 
     polishExpression.trim().split(' ').filter(el => el !== '').reverse().forEach(elem => {               
-        let number = Number(elem);
+        const number = Number(elem);
         let result;
 
         if (isNaN(number)) {
-            let a = stack.pop();
-            let b = stack.pop();
+            const a = stack.pop();
+            const b = stack.pop();
 
             if (a === undefined || b === undefined) {
                 throw new Error("Недостаточное количество операндов (аргументов операции)");
