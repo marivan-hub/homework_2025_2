@@ -17,7 +17,7 @@ const polishNotationEvaluator = (polishExpression) => {
         return NaN;
     }
 
-    if ((typeof(polishExpression) != 'string') || !polishExpression) {
+    if ((typeof(polishExpression) != 'string')) {
         throw new Error("Неверный аргумент функции - необходимо передать строку");
     }
     
