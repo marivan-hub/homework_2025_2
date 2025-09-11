@@ -93,4 +93,10 @@ QUnit.module("Тестируем функцию polishNotationEvaluator", functi
         const result1 = polishNotationEvaluator(input1);
         assert.equal(result1, 5);
     });
+
+    QUnit.test("Правильно вычисляет выражение с new(String)", function(assert) {
+        const input = new String("  + 2 3  ");
+        const result = polishNotationEvaluator(input);
+        assert.equal(result, 5);
+    });
 });

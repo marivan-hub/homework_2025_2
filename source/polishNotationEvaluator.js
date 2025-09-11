@@ -11,7 +11,8 @@
  * @returns {Number}
  */
 const polishNotationEvaluator = (polishExpression) => {
-    if (polishExpression === '') {
+    polishExpression = String(polishExpression);
+    if (!polishExpression) {
         console.warn("На вход пришла пустая строка!");
         return NaN;
     }
@@ -30,7 +31,7 @@ const polishNotationEvaluator = (polishExpression) => {
             const a = stack.pop();
             const b = stack.pop();
 
-            if (a === undefined || b === undefined) {
+            if (!a || !b) {
                 throw new Error("Недостаточное количество операндов (аргументов операции)");
             }
 
@@ -42,11 +43,11 @@ const polishNotationEvaluator = (polishExpression) => {
                 result = a * b;
             } else if (elem === '/') {
                 if (b === 0) {
-                    throw new Error("На ноль делить нельзя!");
+                    throw new RangeError("На ноль делить нельзя!");
                 }
                 result = a / b;
             } else {
-                throw new Error(`Неизвестный элемент строки ${elem}`);
+                throw new SyntaxError(`Неизвестный элемент строки ${elem}`);
             }
             stack.push(result);
         }
@@ -55,7 +56,7 @@ const polishNotationEvaluator = (polishExpression) => {
         }
     });
     if (stack.length > 1) {
-        throw new Error('Ошибка итогового значения');
+        throw new SyntaxError('Ошибка итогового значения');
     }
     return stack[0];
 }
